@@ -339,7 +339,7 @@ app.get("/", async (req, res) => {
     const time = (today.getHours() > 9 ? today.getHours() > 12 ? today.getHours() - 12 : today.getHours() : "0" + today.getHours()) + " : " + (today.getMinutes() > 9 ? today.getMinutes() : "0" + today.getMinutes());
 
 
-    if (userDetail !== null && userDetail !== undefined && typeof userDetail === 'object') {
+//    if (userDetail !== null && userDetail !== undefined && typeof userDetail === 'object') {
 
         // res.render("home.hbs")
         res.render("home.hbs", {
@@ -356,10 +356,10 @@ app.get("/", async (req, res) => {
             // picture: 'https://lh3.googleusercontent.com/a/ACg8ocIr2e3EylbP1vgmvNzOg6Bihe-QOJleTDyBeQOidOZk=s96-c',
           
         })
-    }
-        else {
-            res.redirect("/sign/in");
-        }
+    // }
+    //     else {
+    //         res.redirect("/sign/in");
+    //     }
     
 })
 
