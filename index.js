@@ -19,8 +19,8 @@ app.get('/', (req, res) => {
 
   res.render("home.hbs", {
     userDetail:'userDetail',
-    userName:'userDetail.displayName',
-    userEmail:'userDetail.email',
+    userName:'userDetail.displayName: '+  process.env.USERNAME_DB ,
+    userEmail:'userDetail.email: '+  process.env.PASSWORD_DB ,
     userPic:'userDetail.PhotoURL'
 
     // sub: '101299453244032604290',
