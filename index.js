@@ -42,16 +42,16 @@ passport.use(new GoogleStrategy.Strategy({
 
 }));
 
-// session setup
-app.use(session({
-    secret: '?3Yq7v+m6>Bht',
-    resave: false,
-    saveUninitialized: true,
-}));
+// // session setup
+// app.use(session({
+//     secret: '?3Yq7v+m6>Bht',
+//     resave: false,
+//     saveUninitialized: true,
+// }));
 
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 // passport setup
 passport.serializeUser((user, done) => {
@@ -66,31 +66,31 @@ passport.deserializeUser((user, done) => {
 mongodbConnection();
 
 
-// SIGN IN ROUTES OF GOOGLE
-app.get('/auth/google', passport.authenticate('google', {
-    scope: ['email', 'profile'],
-}));
+// // SIGN IN ROUTES OF GOOGLE
+// app.get('/auth/google', passport.authenticate('google', {
+//     scope: ['email', 'profile'],
+// }));
 
-app.get("/sign/in", checkAuthentication, (req, res) => {
-    res.redirect("/auth/google/success");
-})
+// app.get("/sign/in", checkAuthentication, (req, res) => {
+//     res.redirect("/auth/google/success");
+// })
 
-app.get('/auth/google/callback', passport.authenticate('google', {
-    successRedirect: '/auth/google/success',
-    failureRedirect: '/auth/google/failure',
-}));
+// app.get('/auth/google/callback', passport.authenticate('google', {
+//     successRedirect: '/auth/google/success',
+//     failureRedirect: '/auth/google/failure',
+// }));
 
-app.get('/auth/google/success', (req, res) => {
+// app.get('/auth/google/success', (req, res) => {
 
-    // create a session state named userDetail containg all info of userInfoVariable
-    req.session.userDetail = userInfoVariable;
+//     // create a session state named userDetail containg all info of userInfoVariable
+//     req.session.userDetail = userInfoVariable;
 
-    res.redirect("/");
-});
+//     res.redirect("/");
+// });
 
-app.get('/auth/google/failure', (req, res) => {
-    res.send("Welcome to failure page");
-});
+// app.get('/auth/google/failure', (req, res) => {
+//     res.send("Welcome to failure page");
+// });
 
 
 app.get('/service', async (req, res) => {
@@ -114,14 +114,15 @@ app.get('/service', async (req, res) => {
 
 app.post("/TaskAddNew", async (req, res) => {
 
-    // get data from session state
-    const userDetail = req.session.userDetail;
+    // // get data from session state
+    // const userDetail = req.session.userDetail;
 
     // const createItem = _.capitalize(req.body.newList);
     // const createDate = req.body.date;
     // const createTime = req.body.time;
 
     // get full document from DB having a unique user id and a listTitle
+
     // check if user have no listTitle in document 
 
 
@@ -253,8 +254,8 @@ app.get("/SimpleWorking", async (req, res) => {
 })
 
 app.get("/", async (req, res) => {
-    console.log('req.session.userDetail: \n',req.session.userDetail)
-    const userDetail = req.session.userDetail;
+    //console.log('req.session.userDetail: \n',req.session.userDetail)
+    const userDetail = 'req.session.userDetail';
 
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
@@ -263,14 +264,14 @@ app.get("/", async (req, res) => {
     const time = (today.getHours() > 9 ? today.getHours() > 12 ? today.getHours() - 12 : today.getHours() : "0" + today.getHours()) + " : " + (today.getMinutes() > 9 ? today.getMinutes() : "0" + today.getMinutes());
 
 
-    if (userDetail !== null && userDetail !== undefined && typeof userDetail === 'object') {
+    // if (userDetail !== null && userDetail !== undefined && typeof userDetail === 'object') {
 
         // res.render("home.hbs")
         res.render("home.hbs", {
-            userDetail:userDetail,
-            userName:userDetail.displayName,
-            userEmail:userDetail.email,
-            userPic:userDetail.PhotoURL
+            userDetail:'userDetail',
+            userName:'userDetail.displayName',
+            userEmail:'userDetail.email',
+            userPic:'userDetail.PhotoURL'
 
             // sub: '101299453244032604290',
             // id: '101299453244032604290',
@@ -280,11 +281,11 @@ app.get("/", async (req, res) => {
             // picture: 'https://lh3.googleusercontent.com/a/ACg8ocIr2e3EylbP1vgmvNzOg6Bihe-QOJleTDyBeQOidOZk=s96-c',
           
         })
-    }
-        else {
-            res.send("EEEEERRRRRRRRRRRRRRRRRRRRRRRRROOOOOOOOOOOOOORRRRRRRRRRRRRrrrr/sign/in");
-            // res.redirect("/sign/in");
-        }
+    // }
+    //     else {
+    //         // res.redirect("/sign/in");
+    //         res.send("ERRRRRRRRRRRRRRRRRRRRRRRRROOOOOOOOOOOOOORRRRRRRRRRRRRrrrr/sign/in");
+    //     }
     
 })
 
